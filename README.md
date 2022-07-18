@@ -159,4 +159,35 @@ window.renderProducts = (containerId, history) => {
 
 - Ưu điểm:
   - Không bị phụ thuộc dependencies giữa các dự án với nhau (ví dụ: khác version React giữa các dự án)
-    - Vì cho phép tạo một HTML Custom Element nên ta có thể gắn thẻ HTML Custom này vào bất cứ đoạn mã HTML nào, không quan trọng dự án đó đang sử dụng frontend framework nào
+  - Vì cho phép tạo một HTML Custom Element nên ta có thể gắn thẻ HTML Custom này vào bất cứ đoạn mã HTML nào, không quan trọng dự án đó đang sử dụng frontend framework nào
+  - Hỗ trợ Shadow DOM: cho phép style css độc lập, không ảnh hưởng css giữa các dự án với nhau
+  - Có thể phát triển theo hướng package (publish lên một registry) mà không cần phải có domain host cho dự án vì vậy đơn giản trong việc quản lý các version release.
+- Hạn chế:
+  - Không thể chia sẻ tài nguyên giữa các dự án với nhau (ví dụ: sử dụng chung thư viện React)
+
+### 4.5 Run-time integration via Web Components
+
+- Module Federation là một tính năng mới của Webpack 5. Nó cho phép chúng ta cấu hình để một ứng dụng có thể dynamic load code từ một ứng dụng khác.
+
+- Hiểu đơn giản là chúng ta có 2 ứng dụng được phát triển độc lập A và B, ứng dụng B là một phần nhỏ chức năng của ứng dụng A. Module Federation sẽ cho phép ta nhúng ứng dụng B và ứng dụng A và chia sẻ tài nguyên giữa chúng.
+
+- Chi tiết các bạn tham khảo tài liệu tại [Module Federation](https://webpack.js.org/concepts/module-federation/) và các ví dụ tại [Module Federation Examples](https://github.com/module-federation/module-federation-examples)
+
+- Chi tiết demo:
+
+  - [Web components trong React](https://micro-frontends.tuando.net/docs/example/react-example/)
+  - [Web components trong React kết hợp Redux](https://micro-frontends.tuando.net/docs/example/react-redux/)
+
+- Ưu điểm:
+
+  - Có thể chia sẻ tài nguyên giữa các dự án. Ví dụ dự án A sử dụng React 16.x và dự án B cũng sử dụng React 16.x thì khi tải module B sẽ không cần phải tải thêm React một lần nữa, nếu 2 version khác nhau thì nó sẽ tự động tải thêm version React còn thiếu.
+  - Giao tiếp giữa các dự án một cách đơn giản, có thể sử dụng chung một Redux store giữa các dự án với nhau
+
+- Hạn chế:
+  - Các dự án phải sử dụng Module Federation của Webpack 5.x
+  - Buộc phải các dự án phải có các static domain để tải các bundle file tương ứng. Vì các chức năng Module Federation chỉ hỗ trợ cấu hình tải các file từ một remote url
+
+**_Tài liệu tham khảo:_**
+
+- https://martinfowler.com/articles/micro-frontends.html
+- https://micro-frontends.org/
