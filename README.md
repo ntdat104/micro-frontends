@@ -1,4 +1,4 @@
-# Giới thiệu về kiến trúc Micro frontends và ứng dụng thực tiễn vào dự án
+# Micro frontends
 
 ## 1. Giới thiệu về mô hình Micro frontends
 
